@@ -3,35 +3,29 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <title>GTNH Tc4 Map</title>
     </head>
     <body>
-        <div>
-              <canvas id="myChart"></canvas>
-        </div>
-        
+        <canvas id="myCanvas" width="500" height="300" style="border:1px solid #ccc;">
+            
+        </canvas>
         <script>
-          const ctx = document.getElementById('myChart');
-        
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-              datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
+            // 1. Get the canvas element and its 2D rendering context
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // --- DRAWING A FILLED CIRCLE ---
+            ctx.beginPath();                  // Start a new path (crucial for separating shapes)
+            ctx.arc(150, 150, 60, 0, 2 * Math.PI); // Center at (150,150), radius 60
+            ctx.fillStyle = '#3498db';        // Set fill color (Blue)
+            ctx.fill();                       // Fill the circle interior
+            
+            // --- DRAWING AN OUTLINED CIRCLE ---
+            ctx.beginPath();                  // Start a fresh path
+            ctx.arc(350, 150, 60, 0, 2 * Math.PI); // Center at (350,150), radius 60
+            ctx.lineWidth = 5;                // Set border thickness
+            ctx.strokeStyle = '#e74c3c';      // Set border color (Red)
+            ctx.stroke();                     // Draw the outline
         </script>
     </body>
 </html>
