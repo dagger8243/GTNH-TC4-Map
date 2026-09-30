@@ -3,13 +3,35 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My First Web Page</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <title>GTNH Tc4 Map</title>
     </head>
     <body>
-        <h1>Welcome to My Website</h1>
-        <p>This is a basic paragraph of text on a simple HTML page.</p>
-    
-        <!-- This is a link -->
-        <p>Visit the <a href="https://www.w3schools.com" target="_blank">W3Schools website</a> to learn more HTML.</p>
+        <div>
+              <canvas id="myChart"></canvas>
+        </div>
+        
+        <script>
+          const ctx = document.getElementById('myChart');
+        
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        </script>
     </body>
 </html>
