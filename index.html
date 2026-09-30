@@ -14,14 +14,14 @@
             const canvas = document.getElementById('myCanvas');
             const ctx = canvas.getContext('2d');
 
-            function circle(x, y, r) {
+            function circle(x, y, r, c) {
                 ctx.beginPath();                 
                 ctx.arc(x, y, r, 0, 2 * Math.PI);
-                ctx.strokeStyle = '#3498db';        
+                ctx.strokeStyle = c;        
                 ctx.stroke();   
             }
 
-            circle(150,150,60);
+            circle(0,0,20, "#0000FF");
         </script>
     </body>
 </html>
