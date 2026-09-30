@@ -1,27 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" width="100%" height="100%">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>GTNH Tc4 Map</title>
+        
+        <script src="index.js" defer></script>
+        <style src = "index.css"></style>
     </head>
     <body>
-        <canvas id="myCanvas" width="500" height="300" style="border:1px solid #ccc;">
-            
+        <div>
+            <input id = "searchBar">
+            <canvas id="myCanvas">
+        </div>
         </canvas>
-        <script>
-            // 1. Get the canvas element and its 2D rendering context
-            const canvas = document.getElementById('myCanvas');
-            const ctx = canvas.getContext('2d');
-
-            function circle(x, y, r, c) {
-                ctx.beginPath();                 
-                ctx.arc(x, y, r, 0, 2 * Math.PI);
-                ctx.strokeStyle = c;        
-                ctx.stroke();   
-            }
-
-            circle(0,0,20, "#0000FF");
-        </script>
     </body>
 </html>
