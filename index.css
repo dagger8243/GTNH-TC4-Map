@@ -13,14 +13,38 @@ canvas {
     display: block;
     position: absolute;
     top: 0;
+    bottom: 0;
     left: 0;
+    right: 0;
     cursor: crosshair;
+    z-index: 0;
+    /* border: 1px solid white; */
 }
+
 canvas:active {
     cursor: grabbing;
 }
 
 #searchBar {
-    top: 0;
-    z-index: 0;
+    top: 5px;
+    left: 5px;
+    position: fixed;
+    z-index: 1;
+}
+
+#zoom {
+    bottom: 5px;
+    left: 5px;
+    position: fixed;
+    z-index: 6;
+    color: white;
+    /* border: 1px solid white; */
+}
+
+#pos {
+    bottom: 5px;
+    right: 5px;
+    position: fixed;
+    z-index: 1000;
+    color: white;
 }
