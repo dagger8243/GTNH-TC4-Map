@@ -10,7 +10,9 @@
             src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
         ></script>
         <script src="https://d3js.org"></script> -->
-        <script src="CanvasUtils.js" defer></script>
+        <script src="./node_modules/svg-pan-zoom/dist/svg-pan-zoom.min.js"></script>
+
+        <script src="utils.js" defer></script>
         <script src="Research.js" defer></script>
         <script src="Tree.js" defer></script>
         <script src="index.js" defer></script>
@@ -19,9 +21,96 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <input id = "searchBar">
+        <nav class="navbar">
+            <ul class="nav-list">
+                <input type = "search" id = "search" placeholder = "Awaiting Research Name . . .">
+                <input class = "selectCategory" type = "checkbox" name = "BASICS" checked>
+                <input class = "selectCategory" type = "checkbox" name = "THAUMATURGY" checked>
+                <input class = "selectCategory" type = "checkbox" name = "ALCHEMY" checked>
+                <input class = "selectCategory" type = "checkbox" name = "ARTIFICE" checked>
+                <input class = "selectCategory" type = "checkbox" name = "GOLEMANCY" checked>
+                <input class = "selectCategory" type = "checkbox" name = "ELDRITCH" checked>
+                <input class = "selectCategory" type = "checkbox" name = "thaumicenergistics" checked>
+                <input class = "selectCategory" type = "checkbox" name = "NEWHORIZONS" checked>
+                <input class = "selectCategory" type = "checkbox" name = "AUTOMAGY" checked>
+                <input class = "selectCategory" type = "checkbox" name = "TT_CATEGORY" checked>
+                <input class = "selectCategory" type = "checkbox" name = "FORBIDDEN" checked>
+                <input class = "selectCategory" type = "checkbox" name = "MAGICBEES" checked>
+                <input class = "selectCategory" type = "checkbox" name = "botanichorizons" checked>
+                <input class = "selectCategory" type = "checkbox" name = "EMT" checked>
+                <input class = "selectCategory" type = "checkbox" name = "gadomancy" checked>
+                <input class = "selectCategory" type = "checkbox" name = "TM" checked>
+                <input class = "selectCategory" type = "checkbox" name = "THAUMICBASES" checked>
+                <input class = "selectCategory" type = "checkbox" name = "TX" checked>
+                <input class = "selectCategory" type = "checkbox" name = "RBRINGS" checked>
+                <input class = "selectCategory" type = "checkbox" name = "THAUMICBOOTS" checked>
+                <input class = "selectCategory" type = "checkbox" name = "ThaumicHorizons" checked>
+                <input class = "selectCategory" type = "checkbox" name = "THAUMICINSURGENCE" checked>
+                <input class = "selectCategory" type = "checkbox" name = "THAUMIC_MACHINA_CAT" checked>
+                <input class = "selectCategory" type = "checkbox" name = "WT_Category" checked>
+                <input class = "selectCategory" type = "checkbox" name = "WITCHGADG" checked>
+                <input class = "selectCategory" type = "checkbox" name = "BLOODMAGIC" checked>
+                <input class = "selectCategory" type = "checkbox" name = "WITCHERY" checked>
+            </ul>
+            <button class="nav-btn">Settings</button>
+        </nav>
         <p id = "zoom">100%</p>
         <p id = "pos">x: 0, y: 0</p>
-        <canvas id = "myCanvas"></canvas>
+        <svg id = "mySVG" xmlns="http://www.w3.org/2000/svg">
+            <!-- <circle cx="50" cy="50" r="20" fill="blue" /> -->
+        </svg>
+        <script>
+
+            const d = [[50.0, 0.0], [25.0, 43.3], [-25.0, 43.3], [-50.0, 0.0], [-25.0, -43.3], [25.0, -43.3]];
+
+            function newHexagon(x, y, category) {
+                let p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+                let h = d.map(pair => `${pair[0] + x},${pair[1] + y}`)
+
+                p.setAttribute('id', category)
+                p.setAttribute('d', `M${h[0]} L${h[1]} L${h[2]} L${h[3]} L${h[4]} L${h[5]} Z`)
+
+                document.getElementById('mySVG').appendChild(p);
+            } 
+
+            let x = innerWidth/2;
+            let y = innerHeight/2;
+
+            let c = 7;
+
+            let categories = ['WITCHERY', 'BLOODMAGIC', 'WITCHGADG', 'WT_Category', 'THAUMIC_MACHINA_CAT', 'THAUMICINSURGENCE', 'ThaumicHorizons', 'THAUMICBOOTS', 'RBRINGS', 'TX', 'THAUMICBASES', 'TM', 'gadomancy', 'EMT', 'botanichorizons', 'MAGICBEES', 'FORBIDDEN', 'TT_CATEGORY', 'AUTOMAGY', 'NEWHORIZONS', 'thaumicenergistics', 'ELDRITCH', 'GOLEMANCY', 'ARTIFICE', 'ALCHEMY', 'THAUMATURGY', 'BASICS'];
+
+            newHexagon(x - 60, y + 30 + c, categories.pop());
+            newHexagon(x + 60, y + 30 + c, categories.pop());
+            newHexagon(x      ,y - 74 + c, categories.pop());
+
+            for (let i = 0; i < 2*Math.PI; i += 2*Math.PI/8) {
+                let r = 190;
+                
+                let hx = x + r * Math.sin(i);
+                let hy = y + r * Math.cos(i);
+
+                newHexagon(hx, hy, categories.pop())
+            }
+
+            for (let i = 0; i < 2*Math.PI; i += 2*Math.PI/16) {
+                let r = 320;
+                
+                let hx = x + r * Math.sin(i);
+                let hy = y + r * Math.cos(i);
+
+                newHexagon(hx, hy, categories.pop())
+            }
+
+            // let c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+
+            // c.setAttribute("cx", 100)
+            // c.setAttribute("cy", 100)
+            // c.setAttribute("r", 20)
+            // c.setAttribute("fill", "white")
+
+            // document.getElementById('mySVG').appendChild(c);
+        </script>
     </body>
 </html>
